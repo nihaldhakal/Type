@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Races</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Value</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @races.each do |race| %>
+      <tr>
+        <td><%= race.value %></td>
+        <td><%= race.description %></td>
+        <td><%= link_to 'Show', race %></td>
+        <td><%= link_to 'Edit', edit_race_path(race) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Race', new_race_path %>
