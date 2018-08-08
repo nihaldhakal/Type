@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 2018-08-07 16:12:08
+  end_time: 2018-08-07 16:12:08
+  typed_text: MyText
+  total_key_stroke: 1
+  wpm: 1
+  accuracy: 1
+
+two:
+  start_time: 2018-08-07 16:12:08
+  end_time: 2018-08-07 16:12:08
+  typed_text: MyText
+  total_key_stroke: 1
+  wpm: 1
+  accuracy: 1

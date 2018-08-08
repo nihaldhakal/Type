@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180807092858) do
+ActiveRecord::Schema.define(version: 20180807102708) do
+
+  create_table "race_participants", force: :cascade do |t|
+    t.time "start_time"
+    t.time "end_time"
+    t.text "typed_text"
+    t.integer "total_key_stroke"
+    t.integer "wpm"
+    t.integer "accuracy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "races", force: :cascade do |t|
     t.text "value"

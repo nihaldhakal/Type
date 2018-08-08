@@ -1,0 +1,2 @@
+class RaceParticipant < ApplicationRecord
+end
