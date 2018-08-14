@@ -1,0 +1,36 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+h1{
+  font-size: 70px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  width: 400px;
+}
+
+.sign-in, .sign-up {
+  font-size: 28px;
+
+}
+.sign-in,
+.sign-up {
+  font-size: 28px;
+  padding-right: 35px;
+}
+
+.nav-link {
+  padding-bottom: 0px;
+  font-size: 20px;
+}
+.navbar-brand{
+  font-size: 35px;
+}
+.navbar-nav
+  a {
+  margin-left: 10px;
+  color: white;
+  }
+  a:visited {
+    color: #171616 !important;
+  }

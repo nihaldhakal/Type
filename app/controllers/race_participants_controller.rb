@@ -1,12 +1,17 @@
 class RaceParticipantsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  before_action :set_participant, only: [:update]
+  before_action :set_race, only: [:new, :show]
+
+  def new
+  end
+
+  def show
+  end
+
   # POST /race_participants
   # POST /race_participants.json
-  before_action :set_race, only: [:update]
-  def new
-    @race=Race.order("RANDOM()").first
-  end
   def create
     @race_participant = RaceParticipant.new(race_participant_params)
     if @race_participant.save
@@ -26,11 +31,16 @@ class RaceParticipantsController < ApplicationController
     end
   end
 end
+
 private
+
+def set_race
+  @race = Race.order("RANDOM()").first
+end
 
 def race_participant_params
   params.require(:race_participant).permit(:total_key_stroke)
 end
-def set_race
+def set_participant
   @race_participant = RaceParticipant.find(params[:id])
 end
