@@ -3,137 +3,135 @@ var startTime;
 var userKeyPressCount=0;
 
 $(document).ready(function () {
-    displayRandomText();
+  displayRandomText();
 
-    $("#start").on("click", function () {
-        $('#userInput').focus();
-        $('#userInput').val("");
-    });
-});
+  $("#start").on("click", function () {
+    $('#userInput').focus();
+    $('#userInput').val("");
+  });
 
-function storeData() {
-
-    var data= { race_participant: {
-            key_stroke: $(userKeyPressCount),
-            wpm: $("#checkWpm"),
-            accuracy:$("#accuracy"),
-            typed_text: $("#userInput")
-
-        }}
-    ajaxCall(data);
-}
-
-$("#userInput").on("input",function(event){
+  $("#userInput").on("input",function(event){
     if (startTime === undefined) {
-        startTime = new Date($.now());
+      startTime = new Date($.now());
     }
 
     var modifierKeyKeyCodes = [16,17,18,20,27,37,38,39,40,46];
     if (modifierKeyKeyCodes.includes(event.keyCode) == false) {
-        userKeyPressCount++;
+      userKeyPressCount++;
     }
 
     updateWPM();
     updateProgressBar();
     giveColorFeedback();
     if (isGameOver() == true){
-        handleGameOver();
+      handleGameOver();
     }
 
+  });
 });
 
+function storeData() {
+  var data= { race_participant: {
+      key_stroke: $(userKeyPressCount),
+      wpm: $("#checkWpm"),
+      accuracy:$("#accuracy"),
+      typed_text: $("#userInput")
+
+    }}
+  ajaxCall(data);
+}
+
 function displayRandomText() {
-    var randomText=$("#displayedText").text();
-    // var randomIndex = Math.floor(Math.random()*quotes.length);
-    // var randomText = quotes[randomIndex];
-    var randomTextCharArray = randomText.split("");
-    for(var spanCount=0; spanCount < randomTextCharArray.length; spanCount++) {
-        randomTextCharArray[spanCount] = '<span id= "'+spanCount +'">' + randomTextCharArray[spanCount] + '</span>';
-    }
-    var randomTextSpanified = randomTextCharArray.join("");
-    $("#displayedText").html(randomTextSpanified);
+  var randomText=$("#displayedText").text();
+  // var randomIndex = Math.floor(Math.random()*quotes.length);
+  // var randomText = quotes[randomIndex];
+  var randomTextCharArray = randomText.split("");
+  for(var spanCount=0; spanCount < randomTextCharArray.length; spanCount++) {
+    randomTextCharArray[spanCount] = '<span id= "'+spanCount +'">' + randomTextCharArray[spanCount] + '</span>';
+  }
+  var randomTextSpanified = randomTextCharArray.join("");
+  $("#displayedText").html(randomTextSpanified);
 }
 
 function updateWPM(){
-    countCharacters += 1;
-    var currentTime=new Date($.now());
-    var timeInSecs = (currentTime-startTime)/1000;
-    var timeInMins = timeInSecs/60;
-    var wordsWritten = countCharacters/5;
-    var wpm = wordsWritten/timeInMins;
-    wpm = parseInt(wpm,10);
-    $('#checkWpm').text(wpm);
+  countCharacters += 1;
+  var currentTime=new Date($.now());
+  var timeInSecs = (currentTime-startTime)/1000;
+  var timeInMins = timeInSecs/60;
+  var wordsWritten = countCharacters/5;
+  var wpm = wordsWritten/timeInMins;
+  wpm = parseInt(wpm,10);
+  $('#checkWpm').text(wpm);
 }
 
 function giveColorFeedback(){
-    var displayedText = $('#displayedText').text();
-    var userInput = $('#userInput').val();
-    var currentCharIndex = userInput.length - 1;
+  var displayedText = $('#displayedText').text();
+  var userInput = $('#userInput').val();
+  var currentCharIndex = userInput.length - 1;
 
-    for(var i = currentCharIndex; i < displayedText.length - 1 ; i++){
-        $("span #" + i).removeClass("match").removeClass("unmatch");
-    }
+  for(var i = currentCharIndex; i < displayedText.length - 1 ; i++){
+    $("span #" + i).removeClass("match").removeClass("unmatch");
+  }
 
-    if (userInput[currentCharIndex] === displayedText[currentCharIndex]){
-        $("span #" + currentCharIndex).addClass("match").removeClass("unmatch");
-    } else {
-        $("span #" + currentCharIndex).removeClass("match").addClass("unmatch");
-    }
+  if (userInput[currentCharIndex] === displayedText[currentCharIndex]){
+    $("span #" + currentCharIndex).addClass("match").removeClass("unmatch");
+  } else {
+    $("span #" + currentCharIndex).removeClass("match").addClass("unmatch");
+  }
 }
 
 function isGameOver(){
-    return ($('#displayedText').text()===$('#userInput').val())
-
-
+  return ($('#displayedText').text()===$('#userInput').val())
 }
+
 function ajaxCall(data) {
-    $.post( "http://localhost:3000/race_participants/", data, function(){
-    });
+  $.post( "http://localhost:3000/race_participants/", data, function(){
+  });
 }
 
 function handleGameOver() {
-    displayAccuracy();
-    disableInput();
-    storeData();
+  displayAccuracy();
+  disableInput();
+  storeData();
 }
 
 function displayAccuracy() {
-    var displayedTextCharLen= $('#displayedText').text().length;
-    var userKeyPressInputCharLen=userKeyPressCount;
-    var accuracy = ( displayedTextCharLen/userKeyPressInputCharLen )*100;
-    accuracy=Math.round( accuracy );
-    $('#showAccuracy').removeClass("hidden");
-    $(' #accuracy').text(accuracy);
+  var displayedTextCharLen= $('#displayedText').text().length;
+  var userKeyPressInputCharLen=userKeyPressCount;
+  var accuracy = ( displayedTextCharLen/userKeyPressInputCharLen )*100;
+  accuracy=Math.round( accuracy );
+  $('#showAccuracy').removeClass("hidden");
+  $(' #accuracy').text(accuracy);
 }
 function disableInput() {
-    $('#userInput').prop('disabled', true);
+  $('#userInput').prop('disabled', true);
 }
 
 
 function updateProgressBar(){
-    var percentage = 3 + getProgress();
-    var progressBarSelector = $("#newBar");
-    var progressBar = $(progressBarSelector);
-    var displayedText = $('#displayedText').text();
-    var userInput = $('#userInput').val();
-    var currentCharIndex = userInput.length - 1;
-    for(var i = currentCharIndex; i <= displayedText.length - 1 ; i++) {
-        if (userInput[currentCharIndex] === displayedText[currentCharIndex]) {
-            $(progressBar).css("width", percentage + "%" );
-            // $("#newBar").animate({left: "+=500"}, 2000);
-        }
+  var percentage = 3 + getProgress();
+  var progressBarSelector = $("#newBar");
+  var progressBar = $(progressBarSelector);
+  var displayedText = $('#displayedText').text();
+  var userInput = $('#userInput').val();
+  var currentCharIndex = userInput.length - 1;
+  for(var i = currentCharIndex; i <= displayedText.length - 1 ; i++) {
+    if (userInput[currentCharIndex] === displayedText[currentCharIndex]) {
+      $(progressBar).css("width", percentage + "%" );
+      // $("#newBar").animate({left: "+=500"}, 2000);
     }
+  }
 }
 
 function getProgress(){
-    var userInputLength = $("#userInput").val().length;
-    var quoteLength = $("#displayedText").text().length;
-    return ((userInputLength / quoteLength) * 100);
+  var userInputLength = $("#userInput").val().length;
+  var quoteLength = $("#displayedText").text().length;
+  return ((userInputLength / quoteLength) * 100);
 }
 var quotes = ["Hello there", "Genius is one percent inspiration and ninety-nine percent perspiration.", "You can observe a lot just by watching.","A house divided against itself cannot stand.",
-    "Difficulties increase the nearer we get to the goal.","Fate is in your hands and no one elses",
-    "Be the chief but never the lord.","Nothing happens unless first we dream.","Well begun is half done.", "Life is a learning experience, only if you learn."
-    ,"Self-complacency is fatal to progress.","Peace comes from within. Do not seek it without.","What you give is what you get.",
-    "We can only learn to love by loving.","Life is change. Growth is optional. Choose wisely.","You'll see it when you believe it."
-    ,"Today is the tomorrow we worried about yesterday.","It's easier to see the mistakes on someone else's paper."
-    , "Every man dies. Not every man really lives.","To lead people walk behind them.","Having nothing, nothing can he lose."]
+  "Difficulties increase the nearer we get to the goal.","Fate is in your hands and no one elses",
+  "Be the chief but never the lord.","Nothing happens unless first we dream.","Well begun is half done.", "Life is a learning experience, only if you learn."
+  ,"Self-complacency is fatal to progress.","Peace comes from within. Do not seek it without.","What you give is what you get.",
+  "We can only learn to love by loving.","Life is change. Growth is optional. Choose wisely.","You'll see it when you believe it."
+  ,"Today is the tomorrow we worried about yesterday.","It's easier to see the mistakes on someone else's paper."
+  , "Every man dies. Not every man really lives.","To lead people walk behind them.","Having nothing, nothing can he lose."]
