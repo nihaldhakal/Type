@@ -5,27 +5,41 @@ var userKeyPressCount=0;
 $(document).ready(function () {
     displayRandomText();
 
-    $("button").on("click",function () {
+    $("#start").on("click", function () {
         $('#userInput').focus();
         $('#userInput').val("");
     });
-    $("#userInput").on("input",function(event){
-        if (startTime === undefined) {
-            startTime = new Date($.now());
-        }
+});
 
-        var modifierKeyKeyCodes = [16,17,18,20,27,37,38,39,40,46];
-        if (modifierKeyKeyCodes.includes(event.keyCode) == false) {
-            userKeyPressCount++;
-        }
+function storeData() {
 
-        updateWPM();
-        updateProgressBar();
-        giveColorFeedback();
-        if (isGameOver() == true){
-            handleGameOver();
-        }
-    });
+    var data= { race_participant: {
+            key_stroke: $(userKeyPressCount),
+            wpm: $("#checkWpm"),
+            accuracy:$("#accuracy"),
+            typed_text: $("#userInput")
+
+        }}
+    ajaxCall(data);
+}
+
+$("#userInput").on("input",function(event){
+    if (startTime === undefined) {
+        startTime = new Date($.now());
+    }
+
+    var modifierKeyKeyCodes = [16,17,18,20,27,37,38,39,40,46];
+    if (modifierKeyKeyCodes.includes(event.keyCode) == false) {
+        userKeyPressCount++;
+    }
+
+    updateWPM();
+    updateProgressBar();
+    giveColorFeedback();
+    if (isGameOver() == true){
+        handleGameOver();
+    }
+
 });
 
 function displayRandomText() {
@@ -69,11 +83,18 @@ function giveColorFeedback(){
 
 function isGameOver(){
     return ($('#displayedText').text()===$('#userInput').val())
+
+
+}
+function ajaxCall(data) {
+    $.post( "http://localhost:3000/race_participants/", data, function(){
+    });
 }
 
 function handleGameOver() {
     displayAccuracy();
     disableInput();
+    storeData();
 }
 
 function displayAccuracy() {

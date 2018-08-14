@@ -2,10 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 h1{
-  font-size: 70px;
+  font-size: 30px;
   display: block;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 .sign-in, .sign-up {
@@ -32,4 +30,9 @@ h1{
   }
   a:visited {
     color: #171616 !important;
+  }
+  #userInput{
+
+    line-height: 20px;
+    width: 700px;
   }
