@@ -4,6 +4,10 @@ class RaceParticipantsController < ApplicationController
   before_action :set_participant, only: [:update]
   before_action :set_race, only: [:new, :show]
 
+  def index
+    render json: RaceParticipant.all, status: :ok
+  end
+
   def new
   end
 
@@ -39,7 +43,7 @@ def set_race
 end
 
 def race_participant_params
-  params.require(:race_participant).permit(:total_key_stroke)
+  params.require(:race_participant).permit(:total_key_stroke, :accuracy, :wpm, :typed_text, :start_time, :end_time)
 end
 def set_participant
   @race_participant = RaceParticipant.find(params[:id])
