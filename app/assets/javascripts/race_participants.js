@@ -32,12 +32,14 @@ $(document).ready(function () {
 
 function storeData() {
   var data= { race_participant: {
-      key_stroke: $(userKeyPressCount),
-      wpm: $("#checkWpm"),
-      accuracy:$("#accuracy"),
-      typed_text: $("#userInput")
-
-    }}
+      total_key_stroke: userKeyPressCount,
+      wpm: $("#checkWpm").text(),
+      accuracy:$("#accuracy").text(),
+      typed_text: $("#userInput").val(),
+      start_time: moment(startTime).format('MMM Do YYYY, h:mm:ss a'),
+      end_time: moment().format('MMM DD YYYY, h:mm:ss a')
+    }
+  }
   ajaxCall(data);
 }
 
@@ -86,6 +88,7 @@ function isGameOver(){
 
 function ajaxCall(data) {
   $.post( "http://localhost:3000/race_participants/", data, function(){
+      alert("success");
   });
 }
 

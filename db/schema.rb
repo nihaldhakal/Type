@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180808010040) do
+ActiveRecord::Schema.define(version: 20180815085842) do
 
   create_table "race_participants", force: :cascade do |t|
-    t.time "start_time"
-    t.time "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.text "typed_text"
     t.integer "total_key_stroke"
     t.integer "wpm"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20180808010040) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.strin`g "encrypted_password", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20180808010040) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
-    t.datetime `"updated_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

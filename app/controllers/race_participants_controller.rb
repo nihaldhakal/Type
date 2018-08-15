@@ -5,10 +5,14 @@ class RaceParticipantsController < ApplicationController
   before_action :set_race, only: [:new, :show]
 
   def index
-    render json: RaceParticipant.all, status: :ok
+    @race_participants=RaceParticipant.order(created_at: :desc).limit(5)
+    # render json: RaceParticipant.all, status: :ok
   end
 
   def new
+    @race = Race.order("RANDOM()").first
+    @race = Race.new(value: 'aaa')
+
   end
 
   def show
@@ -17,7 +21,12 @@ class RaceParticipantsController < ApplicationController
   # POST /race_participants
   # POST /race_participants.json
   def create
-    @race_participant = RaceParticipant.new(race_participant_params)
+    new_object_params = race_participant_params
+    # new_object_params[:start_time] = Time.at(new_object_params[:start_time])
+    # new_object_params[:end_time] = Time.at(new_object_params[:end_time])
+    new_object_params[:start_time] = DateTime.parse(new_object_params[:start_time])
+    new_object_params[:end_time] = DateTime.parse(new_object_params[:end_time])
+    @race_participant = RaceParticipant.new(new_object_params)
     if @race_participant.save
       render json: @race_participant, status: :created
     else
@@ -39,7 +48,7 @@ end
 private
 
 def set_race
-  @race = Race.order("RANDOM()").first
+
 end
 
 def race_participant_params
