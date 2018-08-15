@@ -1,4 +1,4 @@
-class RaceParticipant < ApplicationRecord
+class ParticipatedRace < ApplicationRecord
 
   def time_taken
     self.end_time - self.start_time

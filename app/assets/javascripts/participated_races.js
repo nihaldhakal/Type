@@ -31,7 +31,7 @@ $(document).ready(function () {
 });
 
 function storeData() {
-  var data= { race_participant: {
+  var data= { participated_race: {
       total_key_stroke: userKeyPressCount,
       wpm: $("#checkWpm").text(),
       accuracy:$("#accuracy").text(),
@@ -87,7 +87,7 @@ function isGameOver(){
 }
 
 function ajaxCall(data) {
-  $.post( "http://localhost:3000/race_participants/", data, function(){
+  $.post( "http://localhost:3000/participated_races/", data, function(){
       alert("success");
   });
 }

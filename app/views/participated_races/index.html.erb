@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Your results</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <!--<th>Start time</th>-->
+    <!--<th>End time</th>-->
+    <th>Total key stroke</th>
+    <th>Accuracy</th>
+    <th>Wpm</th>
+    <th>Total time taken in sec</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @participated_races.each do |participated_race| %>
+    <tr>
+      <!--<td><%= participated_race.start_time %></td>-->
+      <!--<td><%= participated_race.end_time %></td>-->
+      <td><%= participated_race.total_key_stroke %></td>
+      <td><%= participated_race.accuracy %></td>
+      <td><%= participated_race.wpm %></td>
+      <td><%= participated_race.time_taken %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Race', new_participated_race_path %>
