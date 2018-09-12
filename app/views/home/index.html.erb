@@ -39,7 +39,7 @@
         </a>
         <% unless user_signed_in? %>
           <li class="nav-item">
-            <a class="" href="#">Play as guest</a>
+            <a class="" href="http://localhost:3000/participated_races/new">Play as guest</a>
           </li>
         <% end %>
         </li>
@@ -51,13 +51,15 @@
 
 
 <!-- Page Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 text-center">
-      <h1 class="mt-5">Typeracer</h1>
+<% if user_signed_in? %>
+   <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5"><a href="http://localhost:3000/participated_races/new"> Start race</a></h1>
+      </div>
     </div>
   </div>
-</div>
+  <%end%>
 
 <!--&lt;!&ndash; Bootstrap core JavaScript &ndash;&gt;-->
 <script src="vendor/jquery/jquery.min.js"></script>

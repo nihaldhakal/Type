@@ -11,8 +11,8 @@ class ParticipatedRacesController < ApplicationController
 
   def new
     @race = Race.order("RANDOM()").first
-    @race = Race.new(value: 'aaa')
-
+    @race = Race.new(value: 'Be the chief but never the lord.')
+    @playing_as_guest = current_user.blank?
   end
 
   def show

@@ -87,15 +87,17 @@ function isGameOver(){
 }
 
 function ajaxCall(data) {
-  $.post( "http://localhost:3000/participated_races/", data, function(){
-      alert("success");
-  });
+  $.post( "http://localhost:3000/participated_races/", data)
 }
+
 
 function handleGameOver() {
   displayAccuracy();
   disableInput();
-  storeData();
+
+  if (! $("body").hasClass("guest-session")){
+    storeData();
+  }
 }
 
 function displayAccuracy() {

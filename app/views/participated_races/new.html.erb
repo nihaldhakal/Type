@@ -1,3 +1,7 @@
+<% if @playing_as_guest %>
+  <div>PLAYING AS GUEST!</div>
+<% end %>
+
 <div id="barProgress" >
   <div id="newBar">
     <%= image_tag("car.jpg", size: '50*42', class: "float-right") %>
@@ -21,4 +25,8 @@
 <div class="hidden" id="showAccuracy">
   <p >Accuracy : <span id="accuracy"> 0 </span></p>
 </div>
+<div class="hidden" >
+  <a href="http://localhost:3000/participated_races/">See results</a>
+</div>
+
 
