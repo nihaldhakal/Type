@@ -1,7 +1,11 @@
 // Place all the styles related to the race_participants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
 #showAccuracy.hidden {
+  display: none;
+}
+#showResult.hidden{
   display: none;
 }
 
@@ -16,10 +20,24 @@
   //background-color: grey;
   height: 42px;
   border-bottom: 2px solid;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 #newBar {
   width: 50px;
   height: 42px;
   /*background-color: green;*/
-
+}
+#home{
+  font-size: 30px;
+}
+#start{
+  margin-top: 10px;
+}
+p{
+  margin-top: 30px;
+}
+#guestNotice{
+  font-size: 20px;
+  margin-top: 20px;
 }

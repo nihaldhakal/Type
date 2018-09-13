@@ -1,7 +1,6 @@
 <% if @playing_as_guest %>
-  <div>PLAYING AS GUEST!</div>
+  <div id="guestNotice">PLAYING AS GUEST!</div>
 <% end %>
-
 <div id="barProgress" >
   <div id="newBar">
     <%= image_tag("car.jpg", size: '50*42', class: "float-right") %>
@@ -16,17 +15,17 @@
   </h1>
 </div>
 <div>
-  <input type = "text" id="userInput" value="" >
+  <input type = "text" class="form-control-lg" id="userInput" value="" >
 </div>
-<button id="start" >Start</button>
+<input type="reset" class="btn btn-primary" id="start" value="Reset">
 <div>
   <p>WPM : <span id="checkWpm"> 0 </span></p>
 </div>
 <div class="hidden" id="showAccuracy">
-  <p >Accuracy : <span id="accuracy"> 0 </span></p>
+  <p>Accuracy : <span id="accuracy"> 0 </span></p>
 </div>
-<div class="hidden" >
-  <a href="http://localhost:3000/participated_races/">See results</a>
+<div class="hidden" id="showResult">
+ <p><a href="http://localhost:3000/participated_races/" style="color:red" > See results</a></p>
 </div>
 
 

@@ -7,7 +7,6 @@ class CreateRaceParticipants < ActiveRecord::Migration[5.1]
       t.integer :total_key_stroke
       t.integer :wpm
       t.integer :accuracy
-
       t.timestamps
     end
   end

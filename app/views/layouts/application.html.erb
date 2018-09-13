@@ -9,8 +9,9 @@
 </head>
 
 <body class="<%= 'guest-session' unless current_user   %>">
-<div class="container">
-  <%= yield %>
-</div>
+  <%= render "layouts/header" %>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>
