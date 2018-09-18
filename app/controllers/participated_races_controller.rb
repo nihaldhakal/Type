@@ -11,7 +11,6 @@ class ParticipatedRacesController < ApplicationController
 
   def new
     @race = Race.order("RANDOM()").first
-    @race = Race.new(value: 'Be the chief but never the lord.')
     @playing_as_guest = current_user.blank?
   end
 
@@ -52,7 +51,7 @@ def set_race
 end
 
 def participated_race_params
-  params.require(:participated_race).permit(:total_key_stroke, :accuracy, :wpm, :typed_text, :start_time, :end_time)
+  params.require(:participated_race).permit(:total_key_stroke, :accuracy, :wpm, :typed_text, :start_time, :end_time, :race_id)
 end
 def set_participant
   @participated_race = ParticipatedRace.find(params[:id])

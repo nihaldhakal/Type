@@ -2,7 +2,7 @@
   <!--<a href="http://localhost:3000/#" style="..."></a>-->
 <!--</nav>-->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary static-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success static-top">
   <div class="container">
     <a class="navbar-brand" href="http://localhost:3000/" style="font-size: 30px">Type Racer</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,11 +21,11 @@
           <li><%= link_to "Sign Up", new_user_registration_path, class: "active" %></li>
         <% end %>
         </a>
-        <% unless user_signed_in? %>
-          <li class="nav-item">
-            <a class="" href="http://localhost:3000/participated_races/new" style="font-size: 20px">Play as guest</a>
-          </li>
-        <% end %>
+        <!--<% unless user_signed_in? %>-->
+          <!--<li class="nav-item">-->
+            <!--<a class="" href="http://localhost:3000/participated_races/new" style="font-size: 20px">Play as guest</a>-->
+          <!--</li>-->
+        <!--<% end %>-->
         </li>
       </div>
     </div>

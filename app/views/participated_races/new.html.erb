@@ -1,6 +1,8 @@
 <% if @playing_as_guest %>
   <div id="guestNotice">PLAYING AS GUEST!</div>
 <% end %>
+
+<span id="race_id" data-race-id="<%= @race.id %>"></span>
 <div id="barProgress" >
   <div id="newBar">
     <%= image_tag("car.jpg", size: '50*42', class: "float-right") %>

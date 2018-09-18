@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Type Race </title>
-  <%= csrf_meta_tags %>
+  <head>
+    <title>Type Race </title>
+    <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-</head>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
 
-<body class="<%= 'guest-session' unless current_user   %>">
-  <%= render "layouts/header" %>
-  <div class="container">
-    <%= yield %>
-  </div>
-</body>
+  <body class="<%= 'guest-session' unless current_user   %>">
+    <%= render "layouts/header" %>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <%= render "layouts/footer" %>
+  </body>
+
 </html>

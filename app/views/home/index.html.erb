@@ -52,15 +52,24 @@
 
 <!-- Page Content -->
 <% if user_signed_in? %>
-   <div class="container">
+  <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5"><a href="http://localhost:3000/participated_races/new"> Start race</a></h1>
       </div>
     </div>
   </div>
-  <%end%>
-
+<%end%>
+   <!--Page content when not signed in -->
+<% unless user_signed_in? %>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5"><a href="http://localhost:3000/participated_races/new"> Play as guest</a></h1>
+      </div>
+    </div>
+  </div>
+<% end %>
 <!--&lt;!&ndash; Bootstrap core JavaScript &ndash;&gt;-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

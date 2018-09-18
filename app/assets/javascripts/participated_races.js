@@ -4,6 +4,7 @@ var userKeyPressCount=0;
 $(document).ready(function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
+        $("#userInput").tooltip();
     });
     displayRandomText();
 
@@ -33,6 +34,7 @@ $(document).ready(function () {
 
 function storeData() {
     var data= { participated_race: {
+            race_id: $("#race_id").data("raceId"),
             total_key_stroke: userKeyPressCount,
             wpm: $("#checkWpm").text(),
             accuracy:$("#accuracy").text(),
