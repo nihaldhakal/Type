@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914074720) do
+ActiveRecord::Schema.define(version: 20180925103309) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "participated_races", force: :cascade do |t|
     t.datetime "start_time"
@@ -21,8 +24,10 @@ ActiveRecord::Schema.define(version: 20180914074720) do
     t.integer "accuracy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "race_id"
+    t.bigint "race_id"
+    t.bigint "user_id"
     t.index ["race_id"], name: "index_participated_races_on_race_id"
+    t.index ["user_id"], name: "index_participated_races_on_user_id"
   end
 
   create_table "races", force: :cascade do |t|
@@ -49,4 +54,6 @@ ActiveRecord::Schema.define(version: 20180914074720) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "participated_races", "races"
+  add_foreign_key "participated_races", "users"
 end
