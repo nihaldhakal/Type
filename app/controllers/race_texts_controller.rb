@@ -1,10 +1,10 @@
-class RacesController < ApplicationController
+class RaceTextsController < ApplicationController
   before_action :set_race, only: [:show, :edit, :update, :destroy]
 
   # GET /races
   # GET /races.json
   def index
-    @races = Race.all
+    @races = RaceText.all
   end
 
   # GET /races/1
